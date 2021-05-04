@@ -1,0 +1,49 @@
+/* Use a media query in sass */
+@import '103-sort_list';
+
+@function hash($str) {
+    //turn a string into a list of numbers
+    $keys: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z" !default;
+    $lst: ();
+    @for $i from 1 through str-length($str) {
+        $chr: str-slice($str, $i, $i);
+        $lst: append($lst, index($keys, $chr), $separator: auto);
+    }
+
+    @return $lst;
+}
+
+@function comp($a, $b) {
+    $al: hash($a);
+    $bl: hash($b);
+
+    @for $i from 1 through min(length($al), length($bl)) {
+        @if nth($al, $i) != nth($bl, $i) {
+            @return nth($al, $i) < nth($bl, $i);
+        }
+    }
+
+    @return length($al) < length($bl);
+}
+
+@function sort($list) {
+    $sorted: false;
+
+    @while not $sorted {
+        $sorted: true;
+        @for $i from 1 through length($list) {
+            @if $i > 1 {
+                @if comp(nth($list, $i), nth($list, $i - 1)) {
+                    $temp: nth($list, $i);
+                    $temp2: nth($list, $i - 1);
+                    $list: set-nth($list, $i, $temp2);
+                    $list: set-nth($list, $i - 1, $temp);
+                    $sorted: false;
+                }
+            }
+        }
+    }
+    @return $list;
+}
+
+@debug sort($list_to_sort);

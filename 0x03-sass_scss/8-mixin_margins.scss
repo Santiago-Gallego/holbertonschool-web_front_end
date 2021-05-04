@@ -1,0 +1,11 @@
+/* Use a mixin */
+@mixin margins($amt) {
+    margin-left: $amt;
+    margin-right: $amt;
+}
+body {
+    @include margins(10px);
+}
+div {
+    @include margins(15px);
+}

@@ -1,0 +1,16 @@
+/* Use a SASS variable and assign a color */
+$my_color: #3D3D3D;
+$back: #6D6D6D;
+
+body {
+    color: $my_color;
+    background-color: $back;
+}
+
+p {
+    color: $my_color;
+}
+
+h2 {
+    background-color: $back;
+}
