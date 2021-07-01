@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script type="application/javascript">
+            function setCookies() {
+                let fn = document.getElementById("firstname").value;
+                let em = document.getElementById("email").value;
+                let expire = (new Date())
+                    expire.setDate((new Date()).getDate()+10);
+                expire = expire.toUTCString();
+                document.cookie = "firstname="+fn+"; expires="+expire
+                document.cookie = "email="+em+"; expires="+expire
+            }
+            function showCookies() {
+                let fn = getCookie("firstname");
+                let em = getCookie("email");
+                let p = document.createElement("P");
+                p.appendChild(document.createTextNode("Email: " + em + " - Firstname: " + fn));
+                document.body.appendChild(p)
+            }
+
+            function getCookie(name) {
+                let x = document.cookie.split(";");
+                for (let i of x) {
+                    let y = i.split("=")
+                    if (y[0].trim() === name) return y[1];
+                }
+                return "";
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Login to the website</h1>
+        <input id="firstname" type="text" placeholder="Firstname"></input>
+        <input id="email" type="text" placeholder="Email"></input>
+        <button onclick="setCookies()">Log me in</button>
+        <h1>Cookies</h1>
+        <button onclick="showCookies()">Show the cookies</button>
+    </body>
+</html>
