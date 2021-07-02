@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title> </title>
+    <style type="text/css" media="screen">
+    .logout {
+      font-weight: normal;    
+      font-style: italic;
+      margin-left: 10px;
+    }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+  </head>
+  <body>
+    <script>
+      window.onload = function () {
+        function hasSessionStorage() {
+          let test = 'test';
+          try {
+              sessionStorage.setItem(test, test);
+              sessionStorage.removeItem(test);
+              return true;
+          } catch(e) {
+              return false;
+          }
+        }
+
+        const availableItems = ["Shampoo", "Soap", "Sponge", "Water"];
+
+        function start () {
+          createStore();
+          displayCart();
+        }
+
+        function addItemToCart(item) {
+          sessionStorage.setItem(item, true);
+        }
+
+        function createStore() {
+          let ul = document.createElement("ul");
+          document.querySelector("body").appendChild(ul);
+          for (item of availableItems) {
+            let li = document.createElement("li");
+            text = document.createTextNode(item);
+            li.appendChild(text);
+            ul.appendChild(li)
+
+          }
+          ul.addEventListener("click", function (event) {
+            if (event.target.tagName === "LI") {
+              addItemToCart(event.target.textContent);
+            }
+          }, false);
+        }
+
+        function displayCart() {
+          if (sessionStorage.length === 0) {
+            return;
+          }
+
+          let txt = document.createTextNode(
+            `You previously had ${sessionStorage.length} items in your cart`
+          )
+          document.querySelector("body").appendChild(txt);
+        }
+
+        if (!hasSessionStorage()) {
+          console.log(
+          `
+            Sorry, your browser does not support Web storage. Try
+            again with a better one
+          `)
+        } else {
+          start();
+        }
+      }
+    </script>
+  </body>
+</html>
