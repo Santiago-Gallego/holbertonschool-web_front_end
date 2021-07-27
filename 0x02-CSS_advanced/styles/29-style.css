@@ -168,7 +168,7 @@ ul.row {
 .nav {
     margin: 0;
     padding: 0;
-    list-style: none;
+    list-style-type: none;
     text-align: center;
 }
 
@@ -182,7 +182,7 @@ ul.row {
 }
 
 .nav .nav-link:before {
-    content: empty;
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
