@@ -161,7 +161,7 @@ ul.row {
     color: var(--color-primary);
 }
 
-.card-title .card-services {
+.card-services .card-title {
     margin: 0;
 }
 
@@ -173,8 +173,8 @@ ul.row {
 
 .card-services a:hover {
     color: var(--color-white);
-    text-decoration: none;
     background-color: var(--color-primary);
+    text-decoration: none;
 }
 
 .section {
